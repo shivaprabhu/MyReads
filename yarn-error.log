@@ -1,0 +1,51 @@
+Arguments: 
+  /home/prabhu/.nvm/versions/node/v8.11.1/bin/node /usr/share/yarn/bin/yarn.js init
+
+PATH: 
+  /home/prabhu/.nvm/versions/node/v8.11.1/bin:/home/prabhu/anaconda3/bin:/home/prabhu/bin:/usr/local/bin:/home/prabhu/bin:/home/prabhu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:/home/prabhu/prabhu/android-sdk-linux/platform-tools:/home/prabhu/prabhu/android-sdk-linux/tools:/home/prabhu/prabhu/android-sdk-linux/build-tools:/home/prabhu/.fzf/bin:/home/prabhu/android-sdk-linux/platform-tools:/home/prabhu/android-sdk-linux/tools:/home/prabhu/android-sdk-linux/build-tools/23.0.1/
+
+Yarn version: 
+  1.9.4
+
+Node version: 
+  8.11.1
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: canceled
+      at Interface.<anonymous> (/usr/share/yarn/lib/cli.js:126002:13)
+      at emitNone (events.js:106:13)
+      at Interface.emit (events.js:208:7)
+      at Interface._ttyWrite (readline.js:775:16)
+      at ReadStream.onkeypress (readline.js:160:10)
+      at emitTwo (events.js:126:13)
+      at ReadStream.emit (events.js:214:7)
+      at emitKeys (internal/readline.js:420:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (readline.js:1011:36)
+
+npm manifest: 
+  {
+    "dependencies": {
+      "prop-types": "^15.5.8",
+      "react": "^15.5.4",
+      "react-dom": "^15.5.4"
+    },
+    "devDependencies": {
+      "react-scripts": "0.9.5"
+    },
+    "scripts": {
+      "start": "react-scripts start",
+      "build": "react-scripts build",
+      "test": "react-scripts test --env=jsdom",
+      "eject": "react-scripts eject"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
