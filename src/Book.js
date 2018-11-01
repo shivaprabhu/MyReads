@@ -1,22 +1,21 @@
 import React, { Component } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class Book extends Component {
   render() {
     const { book, addBookToShelf, shelf } = this.props;
-
     return (
       <div className="book">
         <div className="book-top">
-          <Link to={{pathname:"/book",search:`?id=${book.id}`}}>
-          <div
-            className="book-cover"
-            style={{
-              width: 128,
-              height: 193,
-              backgroundImage: `url(${book.imageLinks.smallThumbnail})`
-            }}
-          />
+          <Link to={{ pathname: "/book", search: `?id=${book.id}` }}>
+            <div
+              className="book-cover"
+              style={{
+                width: 128,
+                height: 193,
+                backgroundImage: `url(${book.imageLinks.smallThumbnail})`
+              }}
+            />
           </Link>
           <div className="book-shelf-changer">
             <select

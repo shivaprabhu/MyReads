@@ -2,35 +2,41 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Book from "./Book";
 import * as BooksAPI from "./BooksAPI";
+import { DebounceInput } from "react-debounce-input";
 
 class SearchBooks extends Component {
   state = {
     searchInput: "",
-    books: []
+    books: this.props.books
   };
 
   handleSearch = keyword => {
     keyword !== ""
       ? BooksAPI.search(keyword).then(books => {
-          this.setState({ books: books });
+          if (books.hasOwnProperty("error")) {
+            keyword = "";
+          } else {
+            this.setState({ books: books, searchInput: keyword });
+          }
         })
-      : BooksAPI.getAll().then(books => {
-          this.setState({
-            books: books
-          });
+      : this.setState({
+          books: this.props.books,
+          searchInput: keyword
         });
   };
 
-  componentDidMount() {
-    BooksAPI.getAll().then(books => {
+  componentWillReceiveProps(props) {
+    if (this.state.searchInput === "") {
       this.setState({
-        books: books
+        books: props.books
       });
-    });
+    }
   }
 
   render() {
-    const { addBookToShelf, bookAlreadyExistsError,hideBookAlreadyExistsError } = this.props;
+    console.log();
+
+    const { addBookToShelf, bookAlreadyExistsError, hideBookAlreadyExistsError, mapBookToShelf } = this.props;
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -46,26 +52,28 @@ class SearchBooks extends Component {
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
-            <input
+            <DebounceInput
               type="text"
+              minLength={1}
+              debounceTimeout={300}
+              onChange={event => this.handleSearch(event.target.value)}
               placeholder="Search by title or author"
-              onChange={event => {
-                this.handleSearch(event.target.value);
-              }}
             />
           </div>
         </div>
         <div className="search-books-results">
-        {bookAlreadyExistsError && (
-          <div className="error">
-            <p>This book already exists on your shelf!</p>
-            <a href="#" onClick={hideBookAlreadyExistsError}>Close</a>
-          </div>
-        )}
+          {bookAlreadyExistsError && (
+            <div className="error">
+              <p>This book already exists on your shelf!</p>
+              <a href="#" onClick={hideBookAlreadyExistsError}>
+                Close
+              </a>
+            </div>
+          )}
           <ol className="books-grid">
             {this.state.books.map(book => (
               <li key={book.title}>
-                <Book book={book} addBookToShelf={addBookToShelf} shelf="none" />
+                <Book book={book} addBookToShelf={addBookToShelf} shelf={mapBookToShelf.get(book.id) === undefined ? "none" : mapBookToShelf.get(book.id)} />
               </li>
             ))}
           </ol>
